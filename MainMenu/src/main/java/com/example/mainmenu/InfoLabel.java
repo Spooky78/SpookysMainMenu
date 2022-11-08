@@ -14,6 +14,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
 
+/**
+ * Responsible for the information label used on main menu.
+ */
 public class InfoLabel extends Label {
     private final String FONT_PATH;
     {
@@ -25,6 +28,10 @@ public class InfoLabel extends Label {
     }
     private final static String BACKGROUND_IMAGE = "yellow_label.png";
 
+    /**
+     * Creates an information label.
+     * @param text The text that it will display.
+     */
     public InfoLabel(String text){
         setPrefWidth(380);
         setPrefHeight(30);
@@ -38,6 +45,9 @@ public class InfoLabel extends Label {
         setBackground(new Background(backgroundImage));
     }
 
+    /**
+     * Sets fort type and size.
+     */
     private void setLabelFont(){
         try {
             setFont(Font.loadFont(new FileInputStream(FONT_PATH), 23));

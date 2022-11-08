@@ -1,16 +1,18 @@
 package com.example.mainmenu;
 
-import javafx.animation.AnimationTimer;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.util.Random;
 
+/**
+ * Responsible for the main game window.
+ * @author Spooky78
+ */
 public class GameViewManager {
 
     private static final int GAME_WIDTH = 600;
@@ -19,15 +21,21 @@ public class GameViewManager {
     private Scene gameScene;
     private Stage gameStage;
     private Stage menuStage;
-
-    private ImageView[] background;
     private final Random randomPositionGenerator;
 
+    /**
+     * Creates a GameViewManager.
+     */
     public GameViewManager(){
         initializeStage();
         randomPositionGenerator = new Random();
     }
 
+    /**
+     * Creates a new game.
+     * @param menuStage The previous stage (usually menuStage).
+     * @param chosenShip The player character.
+     */
     public void createNewGame(Stage menuStage, Ship chosenShip){
         this.menuStage = menuStage;
         this.menuStage.hide();
@@ -35,6 +43,9 @@ public class GameViewManager {
         gameStage.show();
     }
 
+    /**
+     * Initializes the stage, scene, & pane
+     */
     private void initializeStage(){
         gamePane = new AnchorPane();
         gameScene = new Scene(gamePane, GAME_WIDTH, GAME_HEIGHT);
@@ -42,8 +53,9 @@ public class GameViewManager {
         gameStage.setScene(gameScene);
     }
 
-
-
+    /**
+     * Creates the background (Default DOGERBLUE)
+     */
     private void createBackground(){
         Background background = new Background(new BackgroundFill(Color.DODGERBLUE, CornerRadii.EMPTY , Insets.EMPTY));
         gamePane.setBackground(background);

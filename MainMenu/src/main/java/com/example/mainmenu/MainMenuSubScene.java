@@ -6,11 +6,17 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
 
+/**
+ * Responsible for the main menu sub scene.
+ */
 public class MainMenuSubScene extends SubScene {
 
     private final static String BACKGROUND_IMAGE = "yellow_panel.png";
     private boolean isHidden;
 
+    /**
+     * Creates a main menu sub scene off-screen to the right.
+     */
     public MainMenuSubScene() {
         super(new AnchorPane(), 450, 400);
         prefWidth(450);
@@ -26,6 +32,10 @@ public class MainMenuSubScene extends SubScene {
         setLayoutX(800);
         setLayoutY(150);
     }
+
+    /**
+     * Moves sub scene to new position. If off-screen move to on-screen. If on-screen moves off-screen.
+     */
     public void moveSubScene(){
         TranslateTransition transition = new TranslateTransition();
         transition.setDuration(Duration.seconds(0.3));
@@ -41,6 +51,10 @@ public class MainMenuSubScene extends SubScene {
         transition.play();
     }
 
+    /**
+     * Gets the pane.
+     * @return Returns the pane.
+     */
     public AnchorPane getPane(){
         return (AnchorPane) this.getRoot();
     }

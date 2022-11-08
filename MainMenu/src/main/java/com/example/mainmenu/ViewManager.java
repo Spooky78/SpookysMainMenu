@@ -10,6 +10,9 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Responsible for the main menu window.
+ */
 public class ViewManager {
     private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
@@ -26,6 +29,10 @@ public class ViewManager {
     private int buttonTotal = 0;
     private List<ShipPicker> shipsList;
     private Ship chosenShip;
+
+    /**
+     * Creates a main menu window.
+     */
     public ViewManager(){
         mainPane = new AnchorPane();
         mainScene = new Scene(mainPane, WIDTH, HEIGHT);
@@ -37,6 +44,11 @@ public class ViewManager {
         createButtons();
 
     }
+
+    /**
+     * If sub scene is hidden then move it.
+     * @param subScene The sub scene to be moved.
+     */
     private void showSubScene(MainMenuSubScene subScene){
         if (sceneToHide != null){
             sceneToHide.moveSubScene();
@@ -46,6 +58,9 @@ public class ViewManager {
         sceneToHide = subScene;
     }
 
+    /**
+     * Creates the sub scenes for the main menu.
+     */
     private void createSubScenes(){
         creditsSubScene = new MainMenuSubScene();
         mainPane.getChildren().add(creditsSubScene);
@@ -59,10 +74,13 @@ public class ViewManager {
         shipChooserSubScene = new MainMenuSubScene();
         mainPane.getChildren().add(shipChooserSubScene);
 
-        createShipChooserSubScene();
+        createPlayerCharacterChooserSubScene();
     }
 
-    private void createShipChooserSubScene(){
+    /**
+     * Creates the player character chooser.
+     */
+    private void createPlayerCharacterChooserSubScene(){
         shipChooserSubScene = new MainMenuSubScene();
         mainPane.getChildren().add(shipChooserSubScene);
 
@@ -70,11 +88,15 @@ public class ViewManager {
         chooseShipLabel.setLayoutX(75);
         chooseShipLabel.setLayoutY(25);
         shipChooserSubScene.getPane().getChildren().add(chooseShipLabel);
-        shipChooserSubScene.getPane().getChildren().add(createShipsToChoose());
+        shipChooserSubScene.getPane().getChildren().add(createPlayerCharacterToChoose());
         shipChooserSubScene.getPane().getChildren().add(createButtonToStart());
     }
 
-    private HBox createShipsToChoose(){
+    /**
+     * Creates the player character to choose.
+     * @return The HBox of the player character.
+     */
+    private HBox createPlayerCharacterToChoose(){
         HBox box = new HBox();
         box.setSpacing(5);
         shipsList = new ArrayList<>();
@@ -95,6 +117,10 @@ public class ViewManager {
         return box;
     }
 
+    /**
+     * Creates the start button.
+     * @return The start button.
+     */
     private MainMenuButton createButtonToStart(){
         MainMenuButton startButton = new MainMenuButton("START");
         startButton.setLayoutX(125);
@@ -110,10 +136,18 @@ public class ViewManager {
         return startButton;
     }
 
+    /**
+     * Gets main stage.
+     * @return The main stage.
+     */
     public Stage getMainStage(){
         return mainStage;
     }
 
+    /**
+     * Adds menu buttons to screen.
+     * @param button The button to be added.
+     */
     private void addMenuButtons(MainMenuButton button){
         button.setLayoutX(MENU_BUTTONS_START_X);
         button.setLayoutY(MENU_BUTTONS_START_Y + buttonTotal *100);
@@ -121,6 +155,9 @@ public class ViewManager {
         mainPane.getChildren().add(button);
     }
 
+    /**
+     * Creates all main menu buttons.
+     */
     private void createButtons(){
         createStartButton();
         createScoreButton();
@@ -129,6 +166,9 @@ public class ViewManager {
         createExitButton();
     }
 
+    /**
+     * Creates the play button.
+     */
     private void createStartButton(){
         MainMenuButton startButton = new MainMenuButton("PLAY");
         addMenuButtons(startButton);
@@ -136,6 +176,9 @@ public class ViewManager {
         startButton.setOnAction(actionEvent -> showSubScene(shipChooserSubScene));
     }
 
+    /**
+     * Creates the score button.
+     */
     private void createScoreButton(){
         MainMenuButton scoreButton = new MainMenuButton("Scores");
         addMenuButtons(scoreButton);
@@ -143,6 +186,9 @@ public class ViewManager {
         scoreButton.setOnAction(actionEvent -> showSubScene(scoreSubScene));
     }
 
+    /**
+     * Creates the help button.
+     */
     private void createHelpButton(){
         MainMenuButton helpButton = new MainMenuButton("Help");
         addMenuButtons(helpButton);
@@ -150,6 +196,9 @@ public class ViewManager {
         helpButton.setOnAction(actionEvent -> showSubScene(helpSubScene));
     }
 
+    /**
+     * Creates the credits button.
+     */
     private void createCreditsButton(){
         MainMenuButton creditsButton = new MainMenuButton("Credits");
         addMenuButtons(creditsButton);
@@ -157,12 +206,19 @@ public class ViewManager {
         creditsButton.setOnAction(actionEvent -> showSubScene(creditsSubScene));
     }
 
+    /**
+     * Creates the exit button, that exits the application.
+     */
     private void createExitButton(){
         MainMenuButton exitButton = new MainMenuButton("Exit");
         addMenuButtons(exitButton);
 
         exitButton.setOnAction(actionEvent -> mainStage.close());
     }
+
+    /**
+     * Sets the background to images.
+     */
     private void createBackground(){
         Image backgroundImage = new Image("background_clouds.png", 800, 600, false, false);
         BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, null);
@@ -170,6 +226,9 @@ public class ViewManager {
         mainPane.setBackground(new Background(background));
     }
 
+    /**
+     * Creates the game logo.
+     */
     private void createLogo(){
 
         ImageView logo = new ImageView("logo.png");

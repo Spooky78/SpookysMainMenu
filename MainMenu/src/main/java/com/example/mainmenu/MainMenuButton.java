@@ -11,6 +11,9 @@ import java.io.FileNotFoundException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+/**
+ * Responsible for the button used on main menu.
+ */
 public class MainMenuButton extends Button {
     private final String FONT_PATH;
     {
@@ -39,6 +42,10 @@ public class MainMenuButton extends Button {
     private final String BUTTON_PRESSED_STYLE = "-fx-background-color: transparent; -fx-background-image: url('"+BUTTON_PRESSED_PATH+"');";
     private final String BUTTON_FREE_STYLE = "-fx-background-color: transparent; -fx-background-image: url('"+BUTTON_FREE_PATH+"');";
 
+    /**
+     * Creates a main menu button.
+     * @param text the text that the button will display.
+     */
     public MainMenuButton(String text){
         setText(text);
         setButtonFont();
@@ -48,6 +55,9 @@ public class MainMenuButton extends Button {
         initializeButtonListener();
     }
 
+    /**
+     * Sets the button text font & size.
+     */
     private void setButtonFont(){
         try {
             setFont(Font.loadFont(new FileInputStream(FONT_PATH), 23));
@@ -56,18 +66,27 @@ public class MainMenuButton extends Button {
         }
     }
 
+    /**
+     * Sets button pressed style.
+     */
     private void setButtonPressedStyle(){
         setStyle(BUTTON_PRESSED_STYLE);
         setPrefHeight(49);
         setLayoutY(getLayoutY() + 4);
     }
 
+    /**
+     * Sets button released style.
+     */
     private void setButtonReleasedStyle(){
         setStyle(BUTTON_FREE_STYLE);
         setPrefHeight(45);
         setLayoutY(getLayoutY() - 4);
     }
 
+    /**
+     * Initializes button listeners. Listens for mouse events for button to be pressed and released.
+     */
     private void initializeButtonListener(){
 
         setOnMousePressed(mouseEvent -> {
