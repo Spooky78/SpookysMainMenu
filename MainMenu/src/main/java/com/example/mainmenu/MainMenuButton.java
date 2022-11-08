@@ -18,7 +18,8 @@ public class MainMenuButton extends Button {
     private final String FONT_PATH;
     {
         try {
-            FONT_PATH = String.valueOf(new File(ClassLoader.getSystemResource("kenvector_future.ttf").toURI()));
+            FONT_PATH = String.valueOf(new File(ClassLoader.getSystemResource(
+                "kenvector_future.ttf").toURI()));
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
@@ -26,7 +27,8 @@ public class MainMenuButton extends Button {
     private final URI BUTTON_PRESSED_PATH;
     {
         try {
-            BUTTON_PRESSED_PATH = new File(ClassLoader.getSystemResource("yellow_button_pressed.png").toURI()).toURI();
+            BUTTON_PRESSED_PATH = new File(ClassLoader.getSystemResource(
+                "yellow_button_pressed.png").toURI()).toURI();
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
@@ -34,23 +36,33 @@ public class MainMenuButton extends Button {
     private final URI BUTTON_FREE_PATH;
     {
         try {
-            BUTTON_FREE_PATH = new File(ClassLoader.getSystemResource("yellow_button.png").toURI()).toURI();
+            BUTTON_FREE_PATH = new File(ClassLoader.getSystemResource(
+                "yellow_button.png").toURI()).toURI();
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
     }
-    private final String BUTTON_PRESSED_STYLE = "-fx-background-color: transparent; -fx-background-image: url('"+BUTTON_PRESSED_PATH+"');";
-    private final String BUTTON_FREE_STYLE = "-fx-background-color: transparent; -fx-background-image: url('"+BUTTON_FREE_PATH+"');";
+    private final String BUTTON_PRESSED_STYLE =
+        "-fx-background-color: transparent; -fx-background-image: url('"
+            + BUTTON_PRESSED_PATH + "');";
+    private final String BUTTON_FREE_STYLE =
+        "-fx-background-color: transparent; -fx-background-image: url('"
+            + BUTTON_FREE_PATH + "');";
+    private static final int PREF_WIDTH = 190;
+    private static final int PREF_HEIGHT = 45;
+    private static final int PRESSED_PREF_HEIGHT = 49;
+    private static final int PRESSED_HEIGHT_OFFSET = 4;
+    private static final int FONT_SIZE = 23;
 
     /**
      * Creates a main menu button.
      * @param text the text that the button will display.
      */
-    public MainMenuButton(String text){
+    public MainMenuButton(String text) {
         setText(text);
         setButtonFont();
-        setPrefWidth(190);
-        setPrefHeight(45);
+        setPrefWidth(PREF_WIDTH);
+        setPrefHeight(PREF_HEIGHT);
         setStyle(BUTTON_FREE_STYLE);
         initializeButtonListener();
     }
@@ -58,45 +70,46 @@ public class MainMenuButton extends Button {
     /**
      * Sets the button text font & size.
      */
-    private void setButtonFont(){
+    private void setButtonFont() {
         try {
-            setFont(Font.loadFont(new FileInputStream(FONT_PATH), 23));
+            setFont(Font.loadFont(new FileInputStream(FONT_PATH), FONT_SIZE));
         } catch (FileNotFoundException e) {
-            setFont(Font.font("Verdana", 23));
+            setFont(Font.font("Verdana", FONT_SIZE));
         }
     }
 
     /**
      * Sets button pressed style.
      */
-    private void setButtonPressedStyle(){
+    private void setButtonPressedStyle() {
         setStyle(BUTTON_PRESSED_STYLE);
-        setPrefHeight(49);
-        setLayoutY(getLayoutY() + 4);
+        setPrefHeight(PRESSED_PREF_HEIGHT);
+        setLayoutY(getLayoutY() + PRESSED_HEIGHT_OFFSET);
     }
 
     /**
      * Sets button released style.
      */
-    private void setButtonReleasedStyle(){
+    private void setButtonReleasedStyle() {
         setStyle(BUTTON_FREE_STYLE);
-        setPrefHeight(45);
-        setLayoutY(getLayoutY() - 4);
+        setPrefHeight(PREF_HEIGHT);
+        setLayoutY(getLayoutY() - PRESSED_HEIGHT_OFFSET);
     }
 
     /**
-     * Initializes button listeners. Listens for mouse events for button to be pressed and released.
+     * Initializes button listeners. Listens for mouse events for button to be
+     * pressed and released.
      */
-    private void initializeButtonListener(){
+    private void initializeButtonListener() {
 
         setOnMousePressed(mouseEvent -> {
-            if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+            if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
                 setButtonPressedStyle();
             }
         });
 
         setOnMouseReleased(mouseEvent -> {
-            if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+            if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
                 setButtonReleasedStyle();
             }
         });

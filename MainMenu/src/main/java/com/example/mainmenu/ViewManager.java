@@ -19,8 +19,20 @@ public class ViewManager {
     private final AnchorPane mainPane;
     private final Scene mainScene;
     private final Stage mainStage;
-    private final static int MENU_BUTTONS_START_X = 50;
-    private final static int MENU_BUTTONS_START_Y = 200;
+    private static final int MENU_BUTTONS_START_X = 50;
+    private static final int MENU_BUTTONS_START_Y = 200;
+    private static final int BACKGROUND_START_X = 50;
+    private static final int BACKGROUND_START_Y = 200;
+    private static final int POSITION_X = 75;
+    private static final int POSITION_Y = 25;
+    private static final int CHARACTER_POSITION_X = 20;
+    private static final int CHARACTER_POSITION_Y = 125;
+    private static final int BUTTON_POSITION_X = 125;
+    private static final int BUTTON_POSITION_Y = 300;
+    private static final int LOGO_POSITION_X = 125;
+    private static final int LOGO_POSITION_Y = 300;
+    private static final int SPACING = 5;
+    private static final int BUTTON_SPACING_OFFSET = 100;
     private MainMenuSubScene creditsSubScene;
     private MainMenuSubScene helpSubScene;
     private MainMenuSubScene scoreSubScene;
@@ -33,7 +45,7 @@ public class ViewManager {
     /**
      * Creates a main menu window.
      */
-    public ViewManager(){
+    public ViewManager() {
         mainPane = new AnchorPane();
         mainScene = new Scene(mainPane, WIDTH, HEIGHT);
         mainStage = new Stage();
@@ -49,8 +61,8 @@ public class ViewManager {
      * If sub scene is hidden then move it.
      * @param subScene The sub scene to be moved.
      */
-    private void showSubScene(MainMenuSubScene subScene){
-        if (sceneToHide != null){
+    private void showSubScene(MainMenuSubScene subScene) {
+        if (sceneToHide != null) {
             sceneToHide.moveSubScene();
         }
 
@@ -61,7 +73,7 @@ public class ViewManager {
     /**
      * Creates the sub scenes for the main menu.
      */
-    private void createSubScenes(){
+    private void createSubScenes() {
         creditsSubScene = new MainMenuSubScene();
         mainPane.getChildren().add(creditsSubScene);
 
@@ -80,13 +92,13 @@ public class ViewManager {
     /**
      * Creates the player character chooser.
      */
-    private void createPlayerCharacterChooserSubScene(){
+    private void createPlayerCharacterChooserSubScene() {
         shipChooserSubScene = new MainMenuSubScene();
         mainPane.getChildren().add(shipChooserSubScene);
 
         InfoLabel chooseShipLabel = new InfoLabel("Choose your ship!");
-        chooseShipLabel.setLayoutX(75);
-        chooseShipLabel.setLayoutY(25);
+        chooseShipLabel.setLayoutX(POSITION_X);
+        chooseShipLabel.setLayoutY(POSITION_Y);
         shipChooserSubScene.getPane().getChildren().add(chooseShipLabel);
         shipChooserSubScene.getPane().getChildren().add(createPlayerCharacterToChoose());
         shipChooserSubScene.getPane().getChildren().add(createButtonToStart());
@@ -96,24 +108,24 @@ public class ViewManager {
      * Creates the player character to choose.
      * @return The HBox of the player character.
      */
-    private HBox createPlayerCharacterToChoose(){
+    private HBox createPlayerCharacterToChoose() {
         HBox box = new HBox();
-        box.setSpacing(5);
+        box.setSpacing(SPACING);
         shipsList = new ArrayList<>();
-        for(Ship ship: Ship.values()){
+        for (Ship ship: Ship.values()) {
             ShipPicker shipToPick = new ShipPicker(ship);
             shipsList.add(shipToPick);
             box.getChildren().add(shipToPick);
             shipToPick.setOnMouseClicked(mouseEvent -> {
-                for (ShipPicker ship1 : shipsList){
+                for (ShipPicker ship1 : shipsList) {
                     ship1.setIsBoxChosen(false);
                 }
                 shipToPick.setIsBoxChosen(true);
                 chosenShip = shipToPick.getShip();
             });
         }
-        box.setLayoutX(160 - (70*2));
-        box.setLayoutY(125);
+        box.setLayoutX(CHARACTER_POSITION_X);
+        box.setLayoutY(CHARACTER_POSITION_Y);
         return box;
     }
 
@@ -121,13 +133,13 @@ public class ViewManager {
      * Creates the start button.
      * @return The start button.
      */
-    private MainMenuButton createButtonToStart(){
+    private MainMenuButton createButtonToStart() {
         MainMenuButton startButton = new MainMenuButton("START");
-        startButton.setLayoutX(125);
-        startButton.setLayoutY(300);
+        startButton.setLayoutX(BUTTON_POSITION_X);
+        startButton.setLayoutY(BUTTON_POSITION_Y);
 
         startButton.setOnAction(actionEvent -> {
-            if(chosenShip != null){
+            if (chosenShip != null) {
                 GameViewManager gameManager = new GameViewManager();
                 gameManager.createNewGame(mainStage, chosenShip);
             }
@@ -140,7 +152,7 @@ public class ViewManager {
      * Gets main stage.
      * @return The main stage.
      */
-    public Stage getMainStage(){
+    public Stage getMainStage() {
         return mainStage;
     }
 
@@ -148,9 +160,9 @@ public class ViewManager {
      * Adds menu buttons to screen.
      * @param button The button to be added.
      */
-    private void addMenuButtons(MainMenuButton button){
+    private void addMenuButtons(MainMenuButton button) {
         button.setLayoutX(MENU_BUTTONS_START_X);
-        button.setLayoutY(MENU_BUTTONS_START_Y + buttonTotal *100);
+        button.setLayoutY(MENU_BUTTONS_START_Y + buttonTotal * BUTTON_SPACING_OFFSET);
         buttonTotal++;
         mainPane.getChildren().add(button);
     }
@@ -158,7 +170,7 @@ public class ViewManager {
     /**
      * Creates all main menu buttons.
      */
-    private void createButtons(){
+    private void createButtons() {
         createStartButton();
         createScoreButton();
         createHelpButton();
@@ -169,7 +181,7 @@ public class ViewManager {
     /**
      * Creates the play button.
      */
-    private void createStartButton(){
+    private void createStartButton() {
         MainMenuButton startButton = new MainMenuButton("PLAY");
         addMenuButtons(startButton);
 
@@ -179,7 +191,7 @@ public class ViewManager {
     /**
      * Creates the score button.
      */
-    private void createScoreButton(){
+    private void createScoreButton() {
         MainMenuButton scoreButton = new MainMenuButton("Scores");
         addMenuButtons(scoreButton);
 
@@ -189,7 +201,7 @@ public class ViewManager {
     /**
      * Creates the help button.
      */
-    private void createHelpButton(){
+    private void createHelpButton() {
         MainMenuButton helpButton = new MainMenuButton("Help");
         addMenuButtons(helpButton);
 
@@ -199,7 +211,7 @@ public class ViewManager {
     /**
      * Creates the credits button.
      */
-    private void createCreditsButton(){
+    private void createCreditsButton() {
         MainMenuButton creditsButton = new MainMenuButton("Credits");
         addMenuButtons(creditsButton);
 
@@ -209,7 +221,7 @@ public class ViewManager {
     /**
      * Creates the exit button, that exits the application.
      */
-    private void createExitButton(){
+    private void createExitButton() {
         MainMenuButton exitButton = new MainMenuButton("Exit");
         addMenuButtons(exitButton);
 
@@ -219,21 +231,22 @@ public class ViewManager {
     /**
      * Sets the background to images.
      */
-    private void createBackground(){
-        Image backgroundImage = new Image("background_clouds.png", 800, 600, false, false);
-        BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, null);
-        //BackgroundFill background =new BackgroundFill(Color.ROYALBLUE, CornerRadii.EMPTY , Insets.EMPTY);
+    private void createBackground() {
+        Image backgroundImage = new Image("background_clouds.png", BACKGROUND_START_X,
+            BACKGROUND_START_Y, false, false);
+        BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.REPEAT,
+            BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, null);
         mainPane.setBackground(new Background(background));
     }
 
     /**
      * Creates the game logo.
      */
-    private void createLogo(){
+    private void createLogo() {
 
         ImageView logo = new ImageView("logo.png");
-        logo.setLayoutX(25);
-        logo.setLayoutY(40);
+        logo.setLayoutX(LOGO_POSITION_X);
+        logo.setLayoutY(LOGO_POSITION_Y);
 
         logo.setOnMouseEntered(mouseEvent -> logo.setEffect(new DropShadow()));
 

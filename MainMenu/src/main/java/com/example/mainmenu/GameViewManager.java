@@ -2,7 +2,6 @@ package com.example.mainmenu;
 
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -26,27 +25,27 @@ public class GameViewManager {
     /**
      * Creates a GameViewManager.
      */
-    public GameViewManager(){
+    public GameViewManager() {
         initializeStage();
         randomPositionGenerator = new Random();
     }
 
     /**
      * Creates a new game.
-     * @param menuStage The previous stage (usually menuStage).
+     * @param stage The previous stage (usually menuStage).
      * @param chosenShip The player character.
      */
-    public void createNewGame(Stage menuStage, Ship chosenShip){
-        this.menuStage = menuStage;
+    public void createNewGame(Stage stage, Ship chosenShip) {
+        this.menuStage = stage;
         this.menuStage.hide();
         createBackground();
         gameStage.show();
     }
 
     /**
-     * Initializes the stage, scene, & pane
+     * Initializes the stage, scene, & pane.
      */
-    private void initializeStage(){
+    private void initializeStage() {
         gamePane = new AnchorPane();
         gameScene = new Scene(gamePane, GAME_WIDTH, GAME_HEIGHT);
         gameStage = new Stage();
@@ -54,10 +53,11 @@ public class GameViewManager {
     }
 
     /**
-     * Creates the background (Default DOGERBLUE)
+     * Creates the background (Default DOGERBLUE).
      */
-    private void createBackground(){
-        Background background = new Background(new BackgroundFill(Color.DODGERBLUE, CornerRadii.EMPTY , Insets.EMPTY));
+    private void createBackground() {
+        Background background = new Background(new BackgroundFill(
+            Color.DODGERBLUE, CornerRadii.EMPTY, Insets.EMPTY));
         gamePane.setBackground(background);
     }
 

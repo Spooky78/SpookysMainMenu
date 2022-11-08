@@ -10,12 +10,16 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     @Override
-    public void start(Stage primaryStage){
+    public void start(Stage primaryStage) {
         ViewManager manager = new ViewManager();
         primaryStage = manager.getMainStage();
         primaryStage.show();
     }
 
+    /**
+     * Entry to main method.
+     * @param args command-line arguments array.
+     */
     public static void main(String[] args) {
         launch(args);
     }

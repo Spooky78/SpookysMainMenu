@@ -10,22 +10,23 @@ import javafx.scene.layout.VBox;
  */
 public class ShipPicker extends VBox {
     private final ImageView boxImage;
-    private static final String boxNotChosen = "grey_box.png";
-    private static final String boxChosen = "checkmark.png";
+    private static final String BOX_NOT_CHOSEN = "grey_box.png";
+    private static final String BOX_CHOSEN = "checkmark.png";
+    private static final int SPACING = 10;
     private final Ship ship;
     private boolean isBoxChosen;
 
     /**
      * Creates a player character picker.
-     * @param ship The player character.
+     * @param shipCharacter The player character.
      */
-    public ShipPicker(Ship ship){
-        boxImage = new ImageView(boxNotChosen);
-        ImageView shipImage = new ImageView(ship.getUrl());
-        this.ship = ship;
+    public ShipPicker(Ship shipCharacter) {
+        boxImage = new ImageView(BOX_NOT_CHOSEN);
+        ImageView shipImage = new ImageView(shipCharacter.getUrl());
+        this.ship = shipCharacter;
         isBoxChosen = false;
         this.setAlignment(Pos.CENTER);
-        this.setSpacing(10);
+        this.setSpacing(SPACING);
         this.getChildren().add(boxImage);
         this.getChildren().add(shipImage);
     }
@@ -34,17 +35,17 @@ public class ShipPicker extends VBox {
      * Gets the player character chosen.
      * @return The player character.
      */
-    public Ship getShip(){
+    public Ship getShip() {
         return ship;
     }
 
     /**
      * Sets if option is chosen.
-     * @param isBoxChosen Is option chosen.
+     * @param isBoxChosenParam Is option chosen.
      */
-    public void setIsBoxChosen(boolean isBoxChosen){
-        this.isBoxChosen = isBoxChosen;
-        String imageToSet = this.isBoxChosen ? boxChosen: boxNotChosen;
+    public void setIsBoxChosen(boolean isBoxChosenParam) {
+        this.isBoxChosen = isBoxChosenParam;
+        String imageToSet = this.isBoxChosen ? BOX_CHOSEN : BOX_NOT_CHOSEN;
         boxImage.setImage(new Image(imageToSet));
     }
 
