@@ -1,12 +1,10 @@
 package com.example.mainmenu;
 
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -20,11 +18,11 @@ public class ViewManager {
     private final Stage mainStage;
     private final static int MENU_BUTTONS_START_X = 50;
     private final static int MENU_BUTTONS_START_Y = 200;
-    private SpaceRunnerSubScene creditsSubScene;
-    private SpaceRunnerSubScene helpSubScene;
-    private SpaceRunnerSubScene scoreSubScene;
-    private SpaceRunnerSubScene shipChooserSubScene;
-    private  SpaceRunnerSubScene sceneToHide;
+    private MainMenuSubScene creditsSubScene;
+    private MainMenuSubScene helpSubScene;
+    private MainMenuSubScene scoreSubScene;
+    private MainMenuSubScene shipChooserSubScene;
+    private MainMenuSubScene sceneToHide;
     private int buttonTotal = 0;
     private List<ShipPicker> shipsList;
     private Ship chosenShip;
@@ -39,7 +37,7 @@ public class ViewManager {
         createButtons();
 
     }
-    private void showSubScene(SpaceRunnerSubScene subScene){
+    private void showSubScene(MainMenuSubScene subScene){
         if (sceneToHide != null){
             sceneToHide.moveSubScene();
         }
@@ -49,23 +47,23 @@ public class ViewManager {
     }
 
     private void createSubScenes(){
-        creditsSubScene = new SpaceRunnerSubScene();
+        creditsSubScene = new MainMenuSubScene();
         mainPane.getChildren().add(creditsSubScene);
 
-        helpSubScene = new SpaceRunnerSubScene();
+        helpSubScene = new MainMenuSubScene();
         mainPane.getChildren().add(helpSubScene);
 
-        scoreSubScene = new SpaceRunnerSubScene();
+        scoreSubScene = new MainMenuSubScene();
         mainPane.getChildren().add(scoreSubScene);
 
-        shipChooserSubScene = new SpaceRunnerSubScene();
+        shipChooserSubScene = new MainMenuSubScene();
         mainPane.getChildren().add(shipChooserSubScene);
 
         createShipChooserSubScene();
     }
 
     private void createShipChooserSubScene(){
-        shipChooserSubScene = new SpaceRunnerSubScene();
+        shipChooserSubScene = new MainMenuSubScene();
         mainPane.getChildren().add(shipChooserSubScene);
 
         InfoLabel chooseShipLabel = new InfoLabel("Choose your ship!");
@@ -97,8 +95,8 @@ public class ViewManager {
         return box;
     }
 
-    private SpaceRunnerButton createButtonToStart(){
-        SpaceRunnerButton startButton = new SpaceRunnerButton("START");
+    private MainMenuButton createButtonToStart(){
+        MainMenuButton startButton = new MainMenuButton("START");
         startButton.setLayoutX(125);
         startButton.setLayoutY(300);
 
@@ -116,7 +114,7 @@ public class ViewManager {
         return mainStage;
     }
 
-    private void addMenuButtons(SpaceRunnerButton button){
+    private void addMenuButtons(MainMenuButton button){
         button.setLayoutX(MENU_BUTTONS_START_X);
         button.setLayoutY(MENU_BUTTONS_START_Y + buttonTotal *100);
         buttonTotal++;
@@ -132,35 +130,35 @@ public class ViewManager {
     }
 
     private void createStartButton(){
-        SpaceRunnerButton startButton = new SpaceRunnerButton("PLAY");
+        MainMenuButton startButton = new MainMenuButton("PLAY");
         addMenuButtons(startButton);
 
         startButton.setOnAction(actionEvent -> showSubScene(shipChooserSubScene));
     }
 
     private void createScoreButton(){
-        SpaceRunnerButton scoreButton = new SpaceRunnerButton("Scores");
+        MainMenuButton scoreButton = new MainMenuButton("Scores");
         addMenuButtons(scoreButton);
 
         scoreButton.setOnAction(actionEvent -> showSubScene(scoreSubScene));
     }
 
     private void createHelpButton(){
-        SpaceRunnerButton helpButton = new SpaceRunnerButton("Help");
+        MainMenuButton helpButton = new MainMenuButton("Help");
         addMenuButtons(helpButton);
 
         helpButton.setOnAction(actionEvent -> showSubScene(helpSubScene));
     }
 
     private void createCreditsButton(){
-        SpaceRunnerButton creditsButton = new SpaceRunnerButton("Credits");
+        MainMenuButton creditsButton = new MainMenuButton("Credits");
         addMenuButtons(creditsButton);
 
         creditsButton.setOnAction(actionEvent -> showSubScene(creditsSubScene));
     }
 
     private void createExitButton(){
-        SpaceRunnerButton exitButton = new SpaceRunnerButton("Exit");
+        MainMenuButton exitButton = new MainMenuButton("Exit");
         addMenuButtons(exitButton);
 
         exitButton.setOnAction(actionEvent -> mainStage.close());

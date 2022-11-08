@@ -6,12 +6,12 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
 
-public class SpaceRunnerSubScene extends SubScene {
+public class MainMenuSubScene extends SubScene {
 
     private final static String BACKGROUND_IMAGE = "yellow_panel.png";
     private boolean isHidden;
 
-    public SpaceRunnerSubScene() {
+    public MainMenuSubScene() {
         super(new AnchorPane(), 450, 400);
         prefWidth(450);
         prefHeight(400);

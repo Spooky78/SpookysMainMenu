@@ -11,7 +11,7 @@ import java.io.FileNotFoundException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-public class SpaceRunnerButton extends Button {
+public class MainMenuButton extends Button {
     private final String FONT_PATH;
     {
         try {
@@ -39,7 +39,7 @@ public class SpaceRunnerButton extends Button {
     private final String BUTTON_PRESSED_STYLE = "-fx-background-color: transparent; -fx-background-image: url('"+BUTTON_PRESSED_PATH+"');";
     private final String BUTTON_FREE_STYLE = "-fx-background-color: transparent; -fx-background-image: url('"+BUTTON_FREE_PATH+"');";
 
-    public SpaceRunnerButton(String text){
+    public MainMenuButton(String text){
         setText(text);
         setButtonFont();
         setPrefWidth(190);
