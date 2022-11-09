@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * Responsible for the main menu window.
+ * @author Spooky78
  */
 public class ViewManager {
     private static final int WIDTH = 800;
@@ -21,8 +22,8 @@ public class ViewManager {
     private final Stage mainStage;
     private static final int MENU_BUTTONS_START_X = 50;
     private static final int MENU_BUTTONS_START_Y = 200;
-    private static final int BACKGROUND_START_X = 50;
-    private static final int BACKGROUND_START_Y = 200;
+    private static final int BACKGROUND_X_DIMENSION = 50;
+    private static final int BACKGROUND_Y_DIMENSION = 200;
     private static final int POSITION_X = 75;
     private static final int POSITION_Y = 25;
     private static final int CHARACTER_POSITION_X = 20;
@@ -232,8 +233,8 @@ public class ViewManager {
      * Sets the background to images.
      */
     private void createBackground() {
-        Image backgroundImage = new Image("background_clouds.png", BACKGROUND_START_X,
-            BACKGROUND_START_Y, false, false);
+        Image backgroundImage = new Image("background_clouds.png", BACKGROUND_X_DIMENSION,
+            BACKGROUND_Y_DIMENSION, false, false);
         BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.REPEAT,
             BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, null);
         mainPane.setBackground(new Background(background));
