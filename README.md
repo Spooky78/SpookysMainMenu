@@ -1,5 +1,5 @@
 # SpookysMainMenu
-Spooky's Default Main Menu for JavaFX Games
+Spooky's Default Main Menu for Maven JavaFX Games
 
 #### Default Asset Sources
 * https://kenney.nl/assets/ui-pack
